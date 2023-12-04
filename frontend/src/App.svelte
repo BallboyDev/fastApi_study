@@ -8,4 +8,4 @@
     });
 </script>
 
-<h1>{message}</h1>
+<h1>{message || "svelte page"}</h1>

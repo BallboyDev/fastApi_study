@@ -9,7 +9,6 @@
     - > answer
     - > question
     - > user
-- > frontend
 
 ### sqlalcehmy 
 ```py
@@ -68,3 +67,6 @@ q = db.query(Question).get(1)
 db.delete(q)
 db.commit()
 ```
+
+### 의존성 주입 (DI)
+- 데이터 베이스 세션의 생성과 반환을 자동화하기
