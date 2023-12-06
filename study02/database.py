@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 import contextlib
 
+# 데이터 베이스 접속 주소
 SQLALCHEMY_DATABASE_URL = "sqlite:///./myapi.db"
 
 engine = create_engine(

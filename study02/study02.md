@@ -1,4 +1,9 @@
-### 프로젝트 구조
+# study02
+- APIRouter를 이용해 라우트 함수를 관리
+- SQLAlchemy를 이용해 데이터 베이스 제어
+- 게시판 질문 목록 상세 조회 기능 개발
+
+## 프로젝트 구조
 - > main.py
     - FastAPI 프로젝트의 전체적인 환경 설정 파일
 - > database.py
@@ -10,63 +15,26 @@
     - > question
     - > user
 
-### sqlalcehmy 
-```py
-from models import Question, Answer
-from datetime import datetime
-from database import SessionLocal
+- main.py - FastAPI 프로젝트의 전체적인 환경 설정 파일
+- database.py - 데이터 베이스와 관련된 설정
+- models.py - DB 모델 정의
+- domain - 
+    - question
+        - question_router.py - 라우터 파일
+        - question_crud.py - 데이터 베이스 처리 파일
+        - question_schema.py - 입출력 관리 파일
+    - answer
+    - user
 
-# add Question
-questions = [
-    Question(
-        subject='first question subject',
-        content='first question content',
-        create_date=datetime.now()
-    ), 
-    Question(
-        subject='second question subject',
-        content='second question content',
-        create_date=datetime.now()
-    )
-]
-
-db = SessionLocal()
-
-for q in questions:
-    print(q)
-    db.add(q)
-    db.commit() # db.rollback()
-    
-# add Answer
-q = db.query(Question).get(2)
-a = Answer(question = q, content='answer of second question', create_date=datetime.now())
-db.add(a)
-db.commit()
-
+## ORM
+- 데이터 베이스의 데이터 테이블을 프로그램 객체로 만들어 관리하는 기술
+```sql
+insert into question(subject, content) values ('subject1', 'content1')
+```
+```python
+question = Question(subject='subject1', content='content1')
+db.add(question)
 ```
 
-- 데이터 조회하기
-```py
-from database import SessionLocal
-db = SessionLocal()
-
-# 데이터 조회하기
-db.query(Question).all()
-# pk 값을 이용한 조회
-db.query(Question).get(1)
-# filter 조회
-db.query(Quetsion).filter(Question.subject.like('%pybo%')).all()
-
-# 데이터 수정하기
-q = db.query(Question).get(1)
-q.subject = 'what is pybo update'
-db.commti()
-
-# 데이터 삭제하기
-q = db.query(Question).get(1)
-db.delete(q)
-db.commit()
-```
-
-### 의존성 주입 (DI)
-- 데이터 베이스 세션의 생성과 반환을 자동화하기
+## SQLAlchemy ORM
+`pip install sqlalchemy`

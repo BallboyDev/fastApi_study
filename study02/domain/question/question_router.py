@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
-from database import SessionLocal
+# from database import SessionLocal
+from database import get_db
 from models import Question
 
 router = APIRouter(
@@ -9,10 +10,14 @@ router = APIRouter(
 
 @router.get('/list')
 def question_list():
-    db = SessionLocal()
-    _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
+    # db = SessionLocal()
+    # _question_list = db.query(Question).order_by(Question.create_date.desc()).all()
 
-    # db 세션 객체를 생성한 후에 db.close()를 수행하지 않으면 SQLAlchemy가 사용하는 커넥션 풀에 DB세션이 반환되지 않아 문제가 생긴다.
-    db.close()
+    # # db 세션 객체를 생성한 후에 db.close()를 수행하지 않으면 SQLAlchemy가 사용하는 커넥션 풀에 DB세션이 반환되지 않아 문제가 생긴다.
+    # db.close()
+
+    with get_db() as db:
+        _question_list = db.query(Question).order_by(Question.create_date.desc())
+    all()    
 
     return _question_list
