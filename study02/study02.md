@@ -38,3 +38,14 @@ db.add(question)
 
 ## SQLAlchemy ORM
 `pip install sqlalchemy`
+
+### alembic
+- SQLAlchemy로 작성한 모델을 기반으로 데이터 베이스를 관리할 수 있게 도와주는 도구
+- alembic 설치
+`pip install alembic`
+- alembic 초기화
+`alembic init migrations`
+- 리비전 파일 생성
+`alembic revision --autogenerate`
+- 리비전 파일 실행
+`alembic upgrade head`
